@@ -1,8 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>TripBooker_MVC_Core_5._0</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
