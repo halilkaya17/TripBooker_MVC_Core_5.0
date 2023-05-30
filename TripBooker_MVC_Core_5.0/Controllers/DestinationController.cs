@@ -17,6 +17,7 @@ namespace TripBooker_MVC_Core_5._0.Controllers
         [HttpGet]
         public IActionResult DestinationDetails(int id)
         {
+            ViewBag.i = id;
             var values = destinationManager.TGetByID(id);
             return View(values);
         }
