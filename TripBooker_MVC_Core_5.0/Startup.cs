@@ -73,6 +73,14 @@ namespace TripBooker_MVC_Core_5._0
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
             });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
+
 
         }
     }
