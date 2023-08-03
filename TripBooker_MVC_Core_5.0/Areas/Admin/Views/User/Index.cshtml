@@ -4,6 +4,10 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     int sayac = 0;
+    int sayac1 = 0;
+    int kullaniciSayisi = Model.Count();
+
+
 }
 
 <div class="card">
@@ -24,8 +28,11 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        @{ sayac = sayac + 1;}
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@sayac</strong></td>
+                        @{
+                            sayac1 = sayac1 + 1;
+                            sayac = sayac + 1;
+                        }
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i><strong>@sayac</strong></td>
                         <td>@item.Name @item.Surname</td>
                         <td>@item.UserName</td>
                         <td>@item.Email</td>
@@ -94,6 +101,22 @@
                         </td>
                     </tr>
                 }
+                @{
+                    int boşSatırSayisi = Math.Max(5 - kullaniciSayisi, 0); // En az 5 satır göstermek için gerekli boş satır sayısı
+                }
+
+                @for (int i = 0; i < boşSatırSayisi; i++)
+                {
+                    <tr>
+                        <td><strong>#</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+
             </tbody>
         </table>
     </div>

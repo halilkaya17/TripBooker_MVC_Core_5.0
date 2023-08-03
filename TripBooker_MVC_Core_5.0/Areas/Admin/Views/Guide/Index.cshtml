@@ -19,7 +19,7 @@
                     <th>Açıklama</th>
                     <th>Durum</th>
                     <th>Düzenle</th>
-                </tr>
+                </tr>   
             </thead>
             <tbody class="table-border-bottom-0">
                 @foreach (var item in Model)
@@ -33,18 +33,19 @@
                         @{
                             if (item.Status==true)
                             {
-                                <td><a href="#" class="btn btn-outline-danger">Pasif Yap</a></td>
+                                <td><a id="on" href="/Admin/Guide/ChangeToFalse/@item.GuideID/" class="btn btn-outline-danger">Pasif Yap</a></td>
                             }
                             else
                             {
-                                <td><a href="#" class="btn btn-outline-success">Aktif Yap</a></td>
+                                <td><a id="off" href="/Admin/Guide/ChangeToTrue/@item.GuideID/" class="btn btn-outline-success">Aktif Yap</a></td>
                             }
                         }
-                        <td><a href="#" class="btn btn-outline-success">Düzenle</a></td>
+                        <td><a href="/Admin/Guide/EditGuide/" class="btn btn-outline-primary">Düzenle</a></td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+<br />
 <a href="/Admin/Guide/AddGuide/" class="btn btn-outline-primary">Yeni Rehber Girişi</a>
