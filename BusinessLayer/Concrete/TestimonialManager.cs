@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class TestimonialManager:ITestimonialService
+    public class TestimonialManager : ITestimonialService
     {
         ITestimonialDal _testimonialDal;
 
@@ -35,7 +35,7 @@ namespace BusinessLayer.Concrete
 
         public List<Testimonial> TGetList()
         {
-           return _testimonialDal.GetList();
+            return _testimonialDal.GetList();
         }
 
         public void TUpdate(Testimonial t)

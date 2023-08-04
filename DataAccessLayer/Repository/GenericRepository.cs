@@ -20,7 +20,7 @@ namespace DataAccessLayer.Repository
 
         public T GetByID(int id)
         {
-            using var c= new Context();
+            using var c = new Context();
             return c.Set<T>().Find(id);
         }
 
@@ -32,7 +32,7 @@ namespace DataAccessLayer.Repository
 
         public List<T> GetListByFilter(Expression<Func<T, bool>> filter)
         {
-            using var c=new Context();
+            using var c = new Context();
             return c.Set<T>().Where(filter).ToList();
         }
 
@@ -47,7 +47,7 @@ namespace DataAccessLayer.Repository
         {
             using var c = new Context();
             c.Update(t);
-            c.SaveChanges();        
+            c.SaveChanges();
         }
     }
 }

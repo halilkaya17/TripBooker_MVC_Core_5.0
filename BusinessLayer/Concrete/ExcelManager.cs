@@ -15,6 +15,7 @@ namespace BusinessLayer.Concrete
             ExcelPackage excel = new ExcelPackage();
             var workSheet = excel.Workbook.Worksheets.Add("Sayfa1");
             workSheet.Cells["A1"].LoadFromCollection(t, true, OfficeOpenXml.Table.TableStyles.Light10);
+
             return excel.GetAsByteArray();
         }
     }

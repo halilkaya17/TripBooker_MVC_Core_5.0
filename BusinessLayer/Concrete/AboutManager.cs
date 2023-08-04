@@ -17,7 +17,6 @@ namespace BusinessLayer.Concrete
         {
             _aboutDal = aboutDal;
         }
-
         public void TAdd(About t)
         {
             _aboutDal.Insert(t);
@@ -34,7 +33,7 @@ namespace BusinessLayer.Concrete
         }
 
         public List<About> TGetList()
-        {            
+        {
             return _aboutDal.GetList();
         }
 

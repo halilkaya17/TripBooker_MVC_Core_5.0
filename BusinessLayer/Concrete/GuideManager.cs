@@ -26,7 +26,6 @@ namespace BusinessLayer.Concrete
         public void TChangeToFalseByGuide(int id)
         {
             _guideDal.ChangeToFalseByGuide(id);
-
         }
 
         public void TChangeToTrueByGuide(int id)
@@ -37,7 +36,6 @@ namespace BusinessLayer.Concrete
         public void TDelete(Guide t)
         {
             _guideDal.Delete(t);
-
         }
 
         public Guide TGetByID(int id)

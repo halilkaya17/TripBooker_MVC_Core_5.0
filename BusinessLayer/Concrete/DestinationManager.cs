@@ -13,10 +13,11 @@ namespace BusinessLayer.Concrete
     {
         IDestinationDal _destinationDal;
 
-        public DestinationManager(IDestinationDal destinationDal )
+        public DestinationManager(IDestinationDal destinationDal)
         {
             _destinationDal = destinationDal;
         }
+
         public void TAdd(Destination t)
         {
             _destinationDal.Insert(t);
@@ -25,11 +26,21 @@ namespace BusinessLayer.Concrete
         public void TDelete(Destination t)
         {
             _destinationDal.Delete(t);
-                }
+        }
 
         public Destination TGetByID(int id)
         {
             return _destinationDal.GetByID(id);
+        }
+
+        public Destination TGetDestinationWithGuide(int id)
+        {
+            return _destinationDal.GetDestinationWithGuide(id);
+        }
+
+        public List<Destination> TGetLast4Destinations()
+        {
+            return _destinationDal.GetLast4Destinations();
         }
 
         public List<Destination> TGetList()
