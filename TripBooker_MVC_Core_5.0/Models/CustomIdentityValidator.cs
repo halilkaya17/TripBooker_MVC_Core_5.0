@@ -1,31 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace TripBooker_MVC_Core_5._0.Models
 {
-    public class CustomIdentityValidator: IdentityErrorDescriber
+    public class CustomIdentityValidator : IdentityErrorDescriber
     {
         public override IdentityError PasswordTooShort(int length)
         {
             return new IdentityError()
             {
                 Code = "PasswordTooShort",
-                Description = $"Parola minimum {length} karakter olmalıdır."                
-            };
-        }
-        public override IdentityError PasswordRequiresNonAlphanumeric()
-        {
-            return new IdentityError()
-            {
-                Code = "PasswordRequiresNonAlphanumeric",
-                Description = "Parola en az bir sembol içermelidir."
-            };
-        }
-        public override IdentityError PasswordRequiresLower()
-        {
-            return new IdentityError()
-            {
-                Code = "PasswordRequiresLower",
-                Description = "Parola en az küçük harf içermelidir."
+                Description = $"Parola Minimum {length} karakter olmalıdır"
             };
         }
         public override IdentityError PasswordRequiresUpper()
@@ -33,7 +21,23 @@ namespace TripBooker_MVC_Core_5._0.Models
             return new IdentityError()
             {
                 Code = "PasswordRequiresUpper",
-                Description = "Parola en az büyük harf içermelidir."
+                Description = "Parola en az 1 büyük harf içermelidir"
+            };
+        }
+        public override IdentityError PasswordRequiresLower()
+        {
+            return new IdentityError()
+            {
+                Code = "PasswordRequiresLower",
+                Description = "Parola en az 1 küçük harf içermelidir"
+            };
+        }
+        public override IdentityError PasswordRequiresNonAlphanumeric()
+        {
+            return new IdentityError()
+            {
+                Code = "PasswordRequiresNonAlphanumeric",
+                Description = "Parola en az 1 sembol içermelidir"
             };
         }
     }

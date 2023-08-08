@@ -3,11 +3,14 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TripBooker_MVC_Core_5._0.ViewComponents.MemberDashboard
 {
-    public class _ProfileInformation:ViewComponent
+    public class _ProfileInformation : ViewComponent
     {
         private readonly UserManager<AppUser> _userManager;
 
@@ -19,10 +22,9 @@ namespace TripBooker_MVC_Core_5._0.ViewComponents.MemberDashboard
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.MemberName = values.Name + " " + values.Surname;
-            ViewBag.Phone = values.PhoneNumber;
-            ViewBag.Email = values.Email;
-
+            ViewBag.memberName = values.UserName + " " + values.Surname;
+            ViewBag.memberPhone = values.PhoneNumber;
+            ViewBag.memberMail = values.Email;
             return View();
         }
     }

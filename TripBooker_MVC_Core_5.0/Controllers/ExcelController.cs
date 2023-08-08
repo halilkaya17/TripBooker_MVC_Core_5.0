@@ -3,14 +3,16 @@ using ClosedXML.Excel;
 using DataAccessLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using TripBooker_MVC_Core_5._0.Models;
+
 
 namespace TripBooker_MVC_Core_5._0.Controllers
 {
-    
     public class ExcelController : Controller
     {
         private readonly IExcelService _excelService;
@@ -24,30 +26,34 @@ namespace TripBooker_MVC_Core_5._0.Controllers
         {
             return View();
         }
+
         public List<DestinationModel> DestinationList()
         {
-            List<DestinationModel> destinationModels= new List<DestinationModel>();
-            using(var c = new Context())
+            List<DestinationModel> destinationModels = new List<DestinationModel>();
+            using (var c = new Context())
             {
-                destinationModels=c.Destinations.Select(x=> new DestinationModel
+                destinationModels = c.Destinations.Select(x => new DestinationModel
                 {
-                    City=x.City,
-                    DayNight=x.DayNight,
-                    Price=x.Price,
-                    Capacity=x.Capacity
+                    City = x.City,
+                    DayNight = x.DayNight,
+                    Price = x.Price,
+                    Capacity = x.Capacity
                 }).ToList();
-                return destinationModels;
             }
+            return destinationModels;
         }
+
         public IActionResult StaticExcelReport()
         {
-            return File(_excelService.ExcelList(DestinationList()) , "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "YeniExcel.xlsx");
-        } 
+            return File(_excelService.ExcelList(DestinationList()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "YeniExcel.xlsx");
+            //application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        }
+
         public IActionResult DestinationExcelReport()
         {
-            using (var workbook = new XLWorkbook())
-            { 
-                    var workSheet=workbook.Worksheets.Add("Tur Listesi");
+            using (var workBook = new XLWorkbook())
+            {
+                var workSheet = workBook.Worksheets.Add("Tur Listesi");
                 workSheet.Cell(1, 1).Value = "Şehir";
                 workSheet.Cell(1, 2).Value = "Konaklama Süresi";
                 workSheet.Cell(1, 3).Value = "Fiyat";
@@ -60,12 +66,12 @@ namespace TripBooker_MVC_Core_5._0.Controllers
                     workSheet.Cell(rowCount, 2).Value = item.DayNight;
                     workSheet.Cell(rowCount, 3).Value = item.Price;
                     workSheet.Cell(rowCount, 4).Value = item.Capacity;
-                    
                     rowCount++;
                 }
+
                 using (var stream = new MemoryStream())
                 {
-                    workbook.SaveAs(stream);
+                    workBook.SaveAs(stream);
                     var content = stream.ToArray();
                     return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "YeniListe.xlsx");
                 }

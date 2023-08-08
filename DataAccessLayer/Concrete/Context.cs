@@ -14,7 +14,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-R7AR1ND;database=traversaldb;integrated security=true;");
+            optionsBuilder.UseSqlServer("server=DESKTOP-T1U3KI6\\SQLSERVER2017EXP;database=TripBookerDB2;integrated security=true;");
         }
 
         public DbSet<About> Abouts { get; set; }

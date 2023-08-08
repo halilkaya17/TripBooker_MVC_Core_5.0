@@ -1,19 +1,22 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TripBooker_MVC_Core_5._0.Areas.Member.Controllers
+namespace TraversalCoreProje.Areas.Member.Controllers
 {
     [Area("Member")]
     public class ReservationController : Controller
     {
         DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
+
         ReservationManager reservationManager = new ReservationManager(new EFReservationDal());
 
         private readonly UserManager<AppUser> _userManager;
@@ -38,9 +41,10 @@ namespace TripBooker_MVC_Core_5._0.Areas.Member.Controllers
         public async Task<IActionResult> MyApprovalReservation()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            var valuesList = reservationManager.GetListWithReservationByWaitApproval(values.Id);
+            var valuesList = reservationManager.GetListWithReservationByWaitAprroval(values.Id);
             return View(valuesList);
         }
+
         [HttpGet]
         public IActionResult NewReservation()
         {
@@ -48,19 +52,23 @@ namespace TripBooker_MVC_Core_5._0.Areas.Member.Controllers
                                            select new SelectListItem
                                            {
                                                Text = x.City,
-                                               Value = x.DestinationID.ToString(),
-                                           }
-                                           ).ToList();
-            ViewBag.v=values;
+                                               Value = x.DestinationID.ToString()
+                                           }).ToList();
+            ViewBag.v = values;
             return View();
         }
+
         [HttpPost]
         public IActionResult NewReservation(Reservation p)
         {
-            p.AppUserId = 1;
+            p.AppUserId = 4;
             p.Status = "Onay Bekliyor";
             reservationManager.TAdd(p);
             return RedirectToAction("MyCurrentReservation");
+        }
+        public IActionResult Deneme()
+        {
+            return View();
         }
     }
 }

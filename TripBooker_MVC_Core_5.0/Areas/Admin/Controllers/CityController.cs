@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TripBooker_MVC_Core_5._0.Models;
 
-namespace TraversalCoreProje.Areas.Admin.Controllers
+namespace TripBooker_MVC_Core_5._0.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CityController : Controller

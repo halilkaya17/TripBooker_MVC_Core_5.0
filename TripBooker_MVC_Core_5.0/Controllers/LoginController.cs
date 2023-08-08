@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using TripBooker_MVC_Core_5._0.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;using TripBooker_MVC_Core_5._0.Models;
 
 namespace TripBooker_MVC_Core_5._0.Controllers
 {
     [AllowAnonymous]
-
     public class LoginController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -21,29 +22,27 @@ namespace TripBooker_MVC_Core_5._0.Controllers
         }
 
         [HttpGet]
-        public IActionResult SingUp()
+        public IActionResult SignUp()
         {
             return View();
         }
-
         [HttpPost]
-        public async Task<IActionResult> SingUp(UserRegisterViewModel p)
+        public async Task<IActionResult> SignUp(UserRegisterViewModel p)
         {
             AppUser appUser = new AppUser()
             {
                 Name = p.Name,
                 Surname = p.Surname,
-                Email = p.EMail,
-                UserName = p.Username,
-
+                Email = p.Mail,
+                UserName = p.Username
             };
-            if (p.Password==p.ComfirmPassword)
+            if (p.Password == p.ConfirmPassword)
             {
-                var result =  await _userManager.CreateAsync(appUser, p.Password);
+                var result = await _userManager.CreateAsync(appUser, p.Password);
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("SingIn");
+                    return RedirectToAction("SignIn");
                 }
                 else
                 {
@@ -53,27 +52,23 @@ namespace TripBooker_MVC_Core_5._0.Controllers
                     }
                 }
             }
-
             return View(p);
         }
 
         [HttpGet]
-        public IActionResult SingIn()
+        public IActionResult SignIn()
         {
             return View();
         }
-
         [HttpPost]
-        public async Task<IActionResult> SingIn(UserSignInViewModel p)
+        public async Task<IActionResult> SignIn(UserSignInViewModel p)
         {
-
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(p.username, p.password,false,true);
+                var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Profile", new { area="Member"});
-
+                    return RedirectToAction("Index", "Profile", new { area = "Member" });
                 }
                 else
                 {
